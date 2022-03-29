@@ -1,0 +1,7 @@
+Steps:
+1. Create a form input where a user can add a task
+2. Creata a submit button with the form to add user's input to where it will be displayed on the UI
+3. Allow user to edit their tasks
+4. Allow user to delete their tasks
+5. Show the presence of animation when the user submit the form and delete a task
+6. Deployment
