@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import '../App.css'
+import ListItems from './ListItems'
 
 class Header extends Component {
 
@@ -15,7 +16,7 @@ class Header extends Component {
       }
     }
 
-    // Get user input and create a unique key id for each task
+    // Get user input and create a unique key id for each task entered
     handleUserInput = (e) => {
         this.setState({
             currentTask: {
@@ -25,24 +26,41 @@ class Header extends Component {
         })
     }
 
-    // Confirm user input
+    // When a user submits the form
     formSubmission = (e) => {
         e.preventDefault();
-        console.log(this.state.currentTask)
+        // confirm the data stored in the currentTask state
+        const newTask = this.state.currentTask;
+        console.log(newTask)
+        // Condition if userInput is not empty
+        if (newTask.userInput !== ""){
+            const tasksData = [...this.state.tasks, newTask];
+            // console.log(tasksData);
+            // Modify the state: Set new data to this.state.tasks and set currentTask to empty
+            this.setState({
+                tasks: tasksData,
+                currentTask: {
+                    userInput: "",
+                    key: ""
+                }
+            })
+        }
     }
 
   render() {
-      const { userInput, key } = this.state.currentTask
+      const { userInput} = this.state.currentTask
     return (
-      <header>
-          <form id='task-form' onSubmit={this.formSubmission}>
-              <div className='form__entry'>
-                  <input placeholder='What do you want to do?' value={userInput} onChange={this.handleUserInput} />
-                  <button type='submit'>Add</button>
-              </div>
-        
-          </form>
-      </header>
+      <div>
+        <header>
+            <form id='task-form' onSubmit={this.formSubmission}>
+                <div className='form__entry'>
+                    <input placeholder='What do you want to do?' value={userInput} onChange={this.handleUserInput} />
+                    <button type='submit'>Add</button>
+                </div>
+            </form>
+        </header>
+        <ListItems tasks={this.state.tasks}/>
+      </div>
     )
   }
 }
