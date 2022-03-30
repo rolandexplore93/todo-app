@@ -47,6 +47,30 @@ class Header extends Component {
         }
     }
 
+    deleteItem = (key) => {
+        // Apply filter() to filter out items where there keys do not match
+        const filterTasks = this.state.tasks.filter( item => 
+            (item.key !== key)
+        );
+        console.log(filterTasks);
+        this.setState({
+            tasks: filterTasks
+        })
+    }
+
+    updateEdit = (userInput, key) => {
+        const taskItems = this.state.tasks;
+        // Loop through each item using map()
+        taskItems.map( item =>  {
+            if(item.key === key){
+                item.userInput = userInput;
+            }
+        })
+        this.setState({
+            userInput: userInput
+        })
+    }
+
   render() {
       const { userInput} = this.state.currentTask
     return (
@@ -59,7 +83,10 @@ class Header extends Component {
                 </div>
             </form>
         </header>
-        <ListItems tasks={this.state.tasks}/>
+        <ListItems tasks={this.state.tasks}
+            deleteItem = {this.deleteItem}
+            updateEdit = {this.updateEdit}
+        />
       </div>
     )
   }
