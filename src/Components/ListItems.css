@@ -26,13 +26,16 @@
     color: #fff;
     font-size: 18px;
 }
+
 .listItem input:focus{
     outline: none;
 }
+
 .listItem span{
     position: absolute;
     right: 10px;
 }
+
 .faicons{
     margin: 0 5px;
     font-size: 15px;
